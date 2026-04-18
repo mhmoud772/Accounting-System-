@@ -4,10 +4,12 @@ from io import StringIO
 from functools import wraps
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session, Response
 
+import os
+
 app = Flask(__name__)
-DB_NAME = "accounting.db"
-app.secret_key = "super_secure_ledger_key_2026"
-ADMIN_PASSWORD = "123"
+DB_NAME = os.environ.get("DB_PATH", "accounting.db")
+app.secret_key = os.environ.get("SECRET_KEY", "super_secure_ledger_key_2026")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "123")
 
 def get_db_connection():
     conn = sqlite3.connect(DB_NAME)
