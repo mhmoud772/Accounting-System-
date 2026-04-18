@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  accounting:
+    build: .
+    container_name: accounting_system
+    restart: always
+    ports:
+      - "${PORT:-8002}:8002"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    networks:
+      - microservices_network
+
+networks:
+  microservices_network:
+    name: enterprise_microservices
+    driver: bridge
