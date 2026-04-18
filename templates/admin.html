@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>دفتر الأستاذ - الإدارة</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&amp;family=Tajawal:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#93000b",
+                      "outline": "#6d7a72",
+                      "surface-container": "#e5eeff",
+                      "surface-container-high": "#dce9ff",
+                      "on-primary-fixed": "#002114",
+                      "surface-bright": "#f8f9ff",
+                      "on-surface": "#0b1c30",
+                      "tertiary-fixed-dim": "#bec6e0",
+                      "background": "#f8f9ff",
+                      "on-tertiary-fixed-variant": "#3f465c",
+                      "surface-variant": "#d3e4fe",
+                      "on-tertiary": "#ffffff",
+                      "primary-container": "#00855d",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#e02928",
+                      "on-primary-container": "#f5fff7",
+                      "surface": "#f8f9ff",
+                      "tertiary-container": "#6c748b",
+                      "primary-fixed-dim": "#68dba9",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#bccac0",
+                      "on-secondary-container": "#fffbff",
+                      "on-primary-fixed-variant": "#005137",
+                      "primary-fixed": "#85f8c4",
+                      "secondary-fixed": "#ffdad6",
+                      "on-tertiary-container": "#fefcff",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-tint": "#006c4a",
+                      "on-tertiary-fixed": "#131b2e",
+                      "secondary": "#bb0112",
+                      "on-secondary-fixed": "#410002",
+                      "on-error": "#ffffff",
+                      "on-background": "#0b1c30",
+                      "tertiary": "#545c72",
+                      "surface-container-highest": "#d3e4fe",
+                      "inverse-primary": "#68dba9",
+                      "error-container": "#ffdad6",
+                      "primary": "#006948",
+                      "inverse-on-surface": "#eaf1ff",
+                      "inverse-surface": "#213145",
+                      "surface-container-low": "#eff4ff",
+                      "surface-dim": "#cbdbf5",
+                      "on-surface-variant": "#3d4a42",
+                      "secondary-fixed-dim": "#ffb4ab",
+                      "tertiary-fixed": "#dae2fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Tajawal", "sans-serif"],
+                      "body": ["Almarai", "sans-serif"],
+                      "label": ["Almarai", "sans-serif"]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body, .font-body, .font-label { font-family: 'Almarai', sans-serif !important; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Tajawal', sans-serif !important; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen overflow-x-hidden">
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex flex-row-reverse justify-between items-center px-6 py-3 shadow-sm dark:shadow-none text-emerald-700 font-bold bg-slate-50" style="font-family:'Tajawal'">
+<div class="flex items-center gap-4">
+<div class="relative hidden md:flex items-center bg-surface-container-low rounded-full px-4 py-2">
+<span class="material-symbols-outlined text-outline text-xl ml-2">search</span>
+<input class="bg-transparent border-none text-sm text-on-surface focus:ring-0 placeholder:text-outline w-48 font-body" placeholder="بحث في السجلات..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<a href="{{ url_for('logout') }}" title="تسجيل الخروج" class="p-2 rounded-full hover:bg-red-50 text-slate-500 hover:text-red-600 transition-colors duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined">logout</span>
+</a>
+</div>
+<div class="mr-4 pl-4 border-l border-outline-variant/30">
+    <div class="w-9 h-9 rounded-full bg-emerald-200"></div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-2xl font-black tracking-tight text-emerald-800 font-['Tajawal']">دفتر الأستاذ</span>
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white icon-fill text-xl">account_balance</span>
+</div>
+</div>
+</header>
+<aside class="fixed right-0 h-full w-64 border-l border-slate-200/50 flex flex-col pt-20 z-40 overflow-y-auto bg-slate-50 text-emerald-700 font-['Tajawal'] font-medium text-sm">
+<div class="px-6 py-8">
+<h2 class="text-xl font-bold text-emerald-900 mb-1">المحرر المالي</h2>
+<p class="text-xs text-slate-500 font-body">إدارة الحسابات السيادية</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-3 text-slate-600 px-4 py-3 hover:bg-slate-200 transition-all rounded-lg" href="{{ url_for('index') }}">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span>لوحة التحكم</span>
+</a>
+<a class="flex items-center gap-3 bg-emerald-50 text-emerald-700 rounded-lg font-bold px-4 py-3 shadow-sm shadow-[#0b1c30]/5" href="{{ url_for('admin') }}">
+<span class="material-symbols-outlined text-xl icon-fill">admin_panel_settings</span>
+<span>الإدارة</span>
+</a>
+</nav>
+</aside>
+<main class="mr-64 pt-24 px-10 pb-12 transition-all">
+<div class="mb-10">
+<h1 class="font-headline text-4xl font-extrabold tracking-tight text-on-surface mb-2">إدارة النظام</h1>
+<p class="font-body text-on-surface-variant text-base">نظرة عامة على حالة النظام وسجل النشاطات المركزية.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="bg-surface-container-lowest rounded-xl p-8 flex flex-col justify-between shadow-sm border border-outline-variant/10 lg:col-span-1">
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-headline text-lg font-bold text-on-surface">حالة النظام</h3>
+<div class="p-2 bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-outline">dns</span>
+</div>
+</div>
+<div class="flex items-center gap-4 mt-auto">
+<div class="relative flex h-5 w-5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-20"></span>
+<span class="relative inline-flex rounded-full h-5 w-5 bg-primary"></span>
+</div>
+<span class="font-headline text-3xl font-bold text-primary">يعمل</span>
+</div>
+<p class="font-body text-xs text-on-surface-variant mt-3">الخادم والتطبيق وقاعدة البيانات متصلة وتعمل بكفاءة.</p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-8 flex flex-col justify-between shadow-sm lg:col-span-2 border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute -left-10 -top-10 w-40 h-40 bg-surface-container-low rounded-full blur-3xl opacity-50 transition-colors duration-700"></div>
+<div class="flex justify-between items-start mb-6 relative z-10">
+<h3 class="font-headline text-lg font-bold text-on-surface">ملخص النشاط الكلي</h3>
+<div class="p-2 bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-outline">monitoring</span>
+</div>
+</div>
+<div class="mt-auto relative z-10">
+<div class="font-headline text-6xl font-extrabold text-on-surface tracking-tighter">{{ count }}</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="material-symbols-outlined text-primary text-sm icon-fill">trending_up</span>
+<p class="font-body text-sm text-on-surface-variant font-bold">إجمالي الحركات المسجلة في قاعدة البيانات</p>
+</div>
+</div>
+</div>
+</div>
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/10 overflow-hidden">
+<div class="bg-surface-container-low px-8 py-5 flex justify-between items-center">
+<h3 class="font-headline text-lg font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">history</span>
+آخر العمليات المستلمة
+</h3>
+<a href="{{ url_for('export_csv') }}" class="text-primary text-sm font-bold hover:bg-surface-container-high px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">download</span>
+تصدير الكل
+</a>
+</div>
+<div class="px-4 py-2">
+<div class="flex items-center px-4 py-3 text-xs font-bold text-on-surface-variant uppercase tracking-wider font-label">
+<div class="w-1/4">رقم المرجع</div>
+<div class="w-1/3">البيان</div>
+<div class="w-1/4">التاريخ</div>
+<div class="w-1/6 text-left">الحالة</div>
+</div>
+{% for t in transactions %}
+<div class="flex items-center px-4 py-4 rounded-lg hover:bg-surface-container-low transition-colors duration-200 group cursor-pointer mb-1">
+<div class="w-1/4 font-headline text-sm font-bold text-on-surface">#TRX-{{ 1000 + t.id }}</div>
+<div class="w-1/3 font-body text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">{{ t.description }}</div>
+<div class="w-1/4 font-body text-sm text-outline" dir="ltr">{{ t.created_at[:10] }}</div>
+<div class="w-1/6 flex justify-end">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-primary-fixed text-on-primary-fixed">
+{% if t.type == 'دخل' %}تم الاستلام{% else %}تم الصرف{% endif %}
+</span>
+</div>
+</div>
+{% else %}
+<div class="text-center p-8 text-on-surface-variant font-body text-sm">
+    لا توجد عمليات بعد
+</div>
+{% endfor %}
+</div>
+</section>
+</main>
+</body></html>

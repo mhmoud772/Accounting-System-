@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تعديل العملية - النظام المحاسبي</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&amp;family=Tajawal:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { font-family: 'Almarai', sans-serif; background-color: #f8f9ff; color: #0b1c30; }
+    .font-headline { font-family: 'Tajawal', sans-serif; }
+</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6 antialiased">
+<div class="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden flex flex-col w-full max-w-lg">
+    <div class="bg-[#eff4ff] px-6 py-5 border-b border-[#bccac0]/15 flex justify-between items-center">
+        <h3 class="font-headline font-bold text-lg text-[#0b1c30] flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#006948]">edit</span>
+            تعديل سجل العملية #{{ t.id }}
+        </h3>
+        <a href="{{ url_for('index') }}" class="text-sm font-bold text-gray-400 hover:text-gray-700">إلغاء والعودة</a>
+    </div>
+    <div class="p-6 flex-1 flex flex-col">
+        <form action="{{ url_for('edit_transaction', id=t.id) }}" method="POST" class="space-y-5 flex-1 flex flex-col">
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-[#3d4a42]">نوع العملية</label>
+                <select name="type" required class="w-full bg-[#eff4ff] border-0 text-[#0b1c30] text-sm rounded-lg py-3 focus:ring-2 focus:ring-[#006948]/20 transition-all">
+                    <option value="دخل" {% if t.type == 'دخل' %}selected{% endif %}>دخل</option>
+                    <option value="مصروف" {% if t.type == 'مصروف' %}selected{% endif %}>مصروف</option>
+                </select>
+            </div>
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-[#3d4a42]">المبلغ (ر.س)</label>
+                <input name="amount" value="{{ t.amount }}" required step="0.01" class="w-full bg-[#eff4ff] border-0 text-[#0b1c30] text-sm rounded-lg py-3 focus:ring-2 focus:ring-[#006948]/20 transition-all text-left" dir="ltr" type="number"/>
+            </div>
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-[#3d4a42]">الوصف</label>
+                <input name="description" value="{{ t.description }}" required class="w-full bg-[#eff4ff] border-0 text-[#0b1c30] text-sm rounded-lg py-3 focus:ring-2 focus:ring-[#006948]/20 transition-all"/>
+            </div>
+            <div class="pt-4 mt-auto">
+                <button type="submit" class="w-full bg-gradient-to-r from-[#006948] to-[#00855d] text-white font-bold text-sm rounded-lg py-3.5 hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">save</span>
+                    حفظ التعديلات
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</body></html>
